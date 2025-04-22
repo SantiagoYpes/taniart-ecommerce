@@ -57,7 +57,7 @@ const Product = ({ product, dispatch, REDUCER_ACTIONS, inCart }: PropsType): Rea
                     onClick={onAddToCart}
                     className="bg-white text-black shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100 text-xs px-6 py-2 rounded-none"
                 >
-                    Add to Cart
+                    Agregar a la bolsa
                 </Button>
             </CardFooter>
         </Card>
