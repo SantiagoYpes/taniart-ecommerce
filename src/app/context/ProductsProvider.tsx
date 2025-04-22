@@ -29,7 +29,6 @@ export const ProductsProvider = ({ children }: ChildrenType): ReactElement => {
             })
             return data
         }
-        console.log(products)
         fetchProducts().then(products =>setProducts(products))
     }, [])
 

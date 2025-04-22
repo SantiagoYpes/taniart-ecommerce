@@ -6,9 +6,11 @@ import Product from "./Product"
 const ProductList = () => {
     const {dispatch,REDUCER_ACTIONS, cart} = useCart()
     const {products} =useProducts()
+    console.log(products)
     let pageContent: ReactElement | ReactElement[]  = <p> Loading...</p>
     
     if (products?.length) {
+        
         pageContent = products.map(product =>{
             const inCart: boolean = cart.some(item => item.sku === product.sku)
 
@@ -18,7 +20,7 @@ const ProductList = () => {
         })    
     }
     const content = (
-        <main className="main main--products">
+        <main className="grid grid-cols-1 bg-black sm:grid-cols-2 md:grid-cols-3 gap-x-4 justify-items-center">
             {pageContent}
         </main>
     )

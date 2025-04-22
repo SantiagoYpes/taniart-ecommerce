@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { MainSlider } from './MainSlider'
 export const MainSection = () => {

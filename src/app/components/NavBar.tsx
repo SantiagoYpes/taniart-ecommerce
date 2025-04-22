@@ -75,7 +75,9 @@ export const NavListMenu = () => {
             </Typography>
           </div>
         </MenuItem>
+        <hr className="border-t border-white m-1 w-3/4 mx-auto"/>
       </a>
+      
     ),
   );
 
@@ -91,7 +93,7 @@ export const NavListMenu = () => {
         <MenuHandler>
           <Typography placeholder={"Menu"} as="div" variant="small" className="font-medium">
             <ListItem placeholder={"Menu"}
-              className="flex items-center gap-2 py-2 pr-4 font-medium text-white"
+              className="flex items-center gap-2 py-2 pr-4 font-medium text-white transition-all duration-200  hover:scale-105 hover:brightness-125 hover:text-[rgb(241,203,250) cursor-pointer"
               selected={isMenuOpen || isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen((cur) => !cur)}
             >
@@ -109,7 +111,7 @@ export const NavListMenu = () => {
             </ListItem>
           </Typography>
         </MenuHandler>
-        <MenuList placeholder={"Menu"} className="hidden max-w-screen-xl lg:block bg-black">
+        <MenuList placeholder={"Menu"} className="hidden rounded max-w-screen-xl lg:block bg-black shadow-[0_0_10px_1px_rgb(0,0,0)]">
           <ul className="grid grid-cols-1 gap-y-3 outline-none outline-0">
             {renderItems}
           </ul>
@@ -123,21 +125,21 @@ export const NavListMenu = () => {
 }
 
 type NavItemType ={
-  title :string
+  title :string,
+  redirect: string
 }
-export const NavItem = ({title}:NavItemType) => {
+export const NavItem = ({title, redirect}:NavItemType) => {
   const router = useRouter();
   return (
    
     <Typography placeholder={title}
       as="a"
-      href="#"
       variant="small"
-      color="blue-gray"
+      color="white"
       className="font-medium"
-      onClick={()=>router.push('/products')}
+      onClick={()=>router.push(redirect)}
     >
-      <ListItem placeholder={title} className="flex items-center gap-2 py-2 pr-4">{title}</ListItem>
+      <ListItem placeholder={title} className="flex items-center gap-2 py-2 pr-4 transition-all duration-200 hover:scale-105 hover:brightness-125 hover:text-[rgb(241,203,250)] cursor-pointer">{title}</ListItem>
     </Typography>
   )
 }
@@ -148,11 +150,12 @@ export const NavItem = ({title}:NavItemType) => {
 export const NavBar = () => {
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-black flex justify-between items-center px-8 py-4">
-          <div className="text-xl font-bold">TANIART</div>
+          <div className="text-xl font-bold text-white font-sans">TANIART</div>
           <div className="flex space-x-6 text-sm">
+            <NavItem title="INICIO" redirect="/"/>
             <NavListMenu />
-            <NavItem title="PRODUCTOS"/>
-            <NavItem title="MARCA"/>
+            <NavItem title="PRODUCTOS" redirect="/products"/>
+            <NavItem title="MARCA" redirect="/branding"/>
           </div>
           <div className="flex space-x-4">
             <FaBagShopping size={18} title="Bolsa de Compras" />
