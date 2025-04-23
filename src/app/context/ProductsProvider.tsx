@@ -1,3 +1,4 @@
+"use client";
 import { createContext, ReactElement, useEffect, useState } from "react"
 
 export type ProductType = {

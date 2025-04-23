@@ -1,5 +1,5 @@
-"use-client";
-import { createContext, ReactElement, useMemo, useReducer } from "react"
+"use client";
+import { createContext, ReactElement, ReactNode, useMemo, useReducer } from "react"
 
 export type CartItemType = {
     sku: string,
@@ -104,7 +104,7 @@ const initCartContextState : UseCartContextType ={
 
 export const CartContext = createContext<UseCartContextType>(initCartContextState)
 
-type ChildrenType = { children ?:ReactElement | ReactElement[]}
+type ChildrenType = { children ?:ReactNode | ReactElement | ReactElement[]}
 
 export const CartProvider = ({children}:ChildrenType):ReactElement =>{
     return(

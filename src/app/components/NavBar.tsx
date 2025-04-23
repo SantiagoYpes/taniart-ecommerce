@@ -16,6 +16,7 @@ import {
 import { FaBagShopping } from "react-icons/fa6"; 
 import { TagIcon } from "@heroicons/react/24/solid";
 import { useRouter } from "next/navigation";
+import { SidebarWithBurgerMenu } from "./CartDialog";
 
 const navListMenuItems = [
   {
@@ -157,9 +158,7 @@ export const NavBar = () => {
             <NavItem title="PRODUCTOS" redirect="/products"/>
             <NavItem title="MARCA" redirect="/branding"/>
           </div>
-          <div className="flex space-x-4">
-            <FaBagShopping size={18} title="Bolsa de Compras" />
-          </div>
+            <SidebarWithBurgerMenu/>
         </nav>
   )
 }
