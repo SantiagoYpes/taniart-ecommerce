@@ -49,12 +49,12 @@ export const CartLineItem = ({ item, dispatch, REDUCER_ACTIONS }: PropsType) => 
             >
                 <ListItemAvatar>
                     <Avatar>
-                        <FolderIcon />
+                    <img src={img} alt={item.name} className="cart__img" />
                     </Avatar>
                 </ListItemAvatar>
                 <ListItemText
-                    primary="Single-line item"
-                    secondary={'Secondary text'}
+                    primary={item.name}
+                    secondary={item.price}
                 />
             </ListItem>
 
