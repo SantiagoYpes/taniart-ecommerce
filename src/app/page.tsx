@@ -5,10 +5,9 @@ import { NavBar } from "./components/NavBar";
 export default function Home() {
   return (
     <>
-
           <Background>
             <div className="min-h-screen bg-black text-white font-sans">
-              <NavBar />
+              
               <MainSection />
             </div>
           </Background>

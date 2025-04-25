@@ -1,21 +1,15 @@
 import useCart from "../../hooks/useCart"
 import { useState } from "react"
 import CartLineItem from "./CartLineItem"
-import {
-    Typography,
-    ListItem,
-    ListItemPrefix,
-    Accordion, Button,
-    AccordionHeader,
-    AccordionBody,
+import * as React from 'react';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-} from "@material-tailwind/react";
-import {
-    ShoppingBagIcon,
-} from "@heroicons/react/24/solid";
-import {
-    ChevronDownIcon,
-} from "@heroicons/react/24/outline";
+import { List } from "@mui/material";
+
 export const Cart = () => {
     const [open, setOpen] = useState(0);
     const handleOpen = (value: number) => {
@@ -29,39 +23,24 @@ export const Cart = () => {
     }
 
     const pageContent = confirm ? <h2> Thank you for your order. </h2> :
-        <>
-            <Accordion placeholder={"Taniart"}
-                open={open === 2}
-                icon={
-                    <ChevronDownIcon
-                        strokeWidth={2.5}
-                        className={`mx-auto h-4 w-4 transition-transform ${open === 2 ? "rotate-180" : ""
-                            }`}
-                    />
-                }
-            >
-                <ListItem placeholder={"Taniart"} className="p-0" selected={open === 2}>
-                    <AccordionHeader placeholder={"Taniart"}
-                        onClick={() => handleOpen(2)}
-                        className="border-b-0 p-3"
-                    >
-                        <ListItemPrefix placeholder={"Taniart"}>
-                            <ShoppingBagIcon className="h-5 w-5" />
-                        </ListItemPrefix>
-                        <Typography placeholder={"Taniart"} color="blue-gray" className="mr-auto font-normal">
-                            Prendas en tu Bolsa
-                        </Typography>
-                    </AccordionHeader>
-                </ListItem>
-                <AccordionBody className="py-1">
-                    {cart.map(item => {
-                        return (
-                            <CartLineItem
-                                key={item.sku} item={item} dispatch={dispatch} REDUCER_ACTIONS={REDUCER_ACTIONS} />
-                        )
-                    })}
-
-                </AccordionBody>
+        <div>
+            <Accordion>
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1-content"
+                    id="panel1-header"
+                >
+                    <Typography component="span">Productos en tu Bolsa</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <List>
+                        {cart.map(item => {
+                            return (
+                                <CartLineItem key={item.sku} item={item} REDUCER_ACTIONS={REDUCER_ACTIONS} dispatch={dispatch} />
+                            )
+                        })}
+                    </List>
+                </AccordionDetails>
             </Accordion>
             <hr className="my-2 border-blue-gray-50" />
 
@@ -69,13 +48,13 @@ export const Cart = () => {
                 <p>Total Items :{totalItems}</p>
                 <p>Total Price: {totalPrice}</p>
                 <div className="mt-4">
-                    <Button placeholder={""} color="red" onClick={onSubmitOrder}>
+                    <button color="red" onClick={onSubmitOrder}>
                         Confirmar Compra
-                    </Button>
+                    </button>
                 </div>
 
             </div>
-        </>
+        </div>
     const content = (<>
         {pageContent}
     </>

@@ -1,61 +1,77 @@
-import React from "react";
-import {
-    IconButton,
-    Typography,
-    List,
-    Drawer,
-    Card,
-} from "@material-tailwind/react";
-import {
-    ShoppingBagIcon,
-} from "@heroicons/react/24/solid";
-import {
-    XMarkIcon,
-} from "@heroicons/react/24/outline";
-import Cart from "../products/components/Cart";
+import * as React from 'react';
+import Cart from '../products/components/Cart';
+import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
+import { IconButton } from '@mui/material';
+import Badge, { BadgeProps } from '@mui/material/Badge';
+import { styled } from '@mui/material/styles';
+import useCart from '../hooks/useCart';
 
-export function SidebarWithBurgerMenu() {
-    const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
-    const openDrawer = () => setIsDrawerOpen(true);
-    const closeDrawer = () => setIsDrawerOpen(false);
+const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
+  '& .MuiBadge-badge': {
+    top: 5,
+    padding: '0 4px',
+  },
+}));
 
-    return (
-        <>
-            <div>
-                <IconButton placeholder={"Taniart"} color="white" variant="text" size="lg" onClick={openDrawer}>
-                    {isDrawerOpen ? (
-                        <XMarkIcon className="h-5 w-5 stroke-2" />
-                    ) : (
-                        <ShoppingBagIcon className="h-5 w-5 stroke-2" />
-                    )}
-                </IconButton>
-                {isDrawerOpen && (
-                    <div
-                        onClick={closeDrawer}
-                        className="fixed inset-0 backdrop-blur-sm z-[9998]"
-                    ></div>
-                )}
-                <Drawer placeholder={"Taniart"} placement="right" open={isDrawerOpen} onClose={closeDrawer}>
-                    <Card placeholder={"Taniart"}
-                        shadow={false}
-                        className="h-[calc(100vh-2rem)] w-full p-4 "
-                    >
-                        <div className="mb-2 flex items-center gap-4 p-4">
-                            <img
-                                src="https://docs.material-tailwind.com/img/logo-ct-dark.png"
-                                alt="brand"
-                                className="h-8 w-8"
-                            />
-                            <Typography placeholder={"Taniart"} variant="h5" color="blue-gray">
-                                Bolsa de Compras
-                            </Typography>
-                        </div>
-                        <List placeholder={"Taniart"}>
-                            <Cart/>
-                        </List>
-                    </Card>
-                </Drawer>
-            </div>
-        </>
-    );
+export const CartDialog = () => {
+  const {totalItems} = useCart()
+  const [open, setOpen] = React.useState(false);
+
+  const toggleDrawer = (newOpen: boolean) => () => {
+    setOpen(newOpen);
+  };
+
+  const DrawerList = (
+    <Box role="presentation" sx={{
+      '& .MuiDrawer-paper': {
+        width: '350px',
+      }}}>
+      <List>
+        <ListItem >
+          <Cart />
+        </ListItem>
+      </List>
+      <Divider />
+      <List>
+        {['All mail', 'Trash', 'Spam'].map((text, index) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
+
+  return (
+    <>
+      <IconButton aria-label="cart" sx={{color:'white'}} onClick={toggleDrawer(true)}>
+        <StyledBadge badgeContent={totalItems} color="secondary">
+          <ShoppingBagIcon />
+        </StyledBadge>
+      </IconButton>
+
+      <Drawer open={open} sx={{
+        '& .MuiDrawer-paper': {
+          width: '350px',
+        },
+      }} anchor='right' onClose={toggleDrawer(false)}>
+        {DrawerList}
+      </Drawer>
+    </>
+  );
 }

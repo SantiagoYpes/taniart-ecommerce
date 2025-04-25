@@ -1,164 +1,137 @@
 "use client";
 import React from "react";
-import {
-  Collapse,
-  Typography,
-  ListItem,
-  Menu,
-  MenuHandler,
-  MenuList,
-  MenuItem,
-} from "@material-tailwind/react";
-import {
-  ChevronDownIcon,
-} from "@heroicons/react/24/outline";
-
-import { FaBagShopping } from "react-icons/fa6"; 
-import { TagIcon } from "@heroicons/react/24/solid";
 import { useRouter } from "next/navigation";
-import { SidebarWithBurgerMenu } from "./CartDialog";
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import Container from '@mui/material/Container';
+import Button from '@mui/material/Button';
+import MenuItem from '@mui/material/MenuItem';
+import AdbIcon from '@mui/icons-material/Adb';
+import { CartDialog } from "./CartDialog";
 
-const navListMenuItems = [
-  {
-    title: "Caleidoscopio",
-    description: "Find the perfect solution for your needs.",
-    icon: TagIcon,
-  },
-  {
-    title: "Pecadora",
-    description: "Meet and learn about our dedication",
-    icon: TagIcon,
-  },
-  {
-    title: "Coral",
-    description: "Find the perfect solution for your needs.",
-    icon: TagIcon,
-  },
-  {
-    title: "Ilustación",
-    description: "Learn how we can help you achieve your goals.",
-    icon: TagIcon,
-  },
-  {
-    title: "Dibujo Técnico",
-    description: "Reach out to us for assistance or inquiries",
-    icon: TagIcon,
-  },
-];
-
-export const NavListMenu = () => {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
-  const renderItems = navListMenuItems.map(
-    ({ icon, title, description }, key) => (
-      <a href="#" key={key}>
-        <MenuItem placeholder={"Menu"} className="flex items-center gap-3 rounded-lg">
-          <div className="flex items-center justify-center rounded-lg !bg-blue-gray-50 p-2 ">
-            {" "}
-            {React.createElement(icon, {
-              strokeWidth: 2,
-              className: "h-6 text-white w-6",
-            })}
-          </div>
-          <div>
-            <Typography placeholder={"Menu"}
-              variant="h6"
-              color="white"
-              className="flex items-center text-sm font-bold"
-            >
-              {title}
-            </Typography>
-            <Typography placeholder={"Menu"}
-              variant="paragraph"
-              className="text-xs !font-medium text-white"
-            >
-              {description}
-            </Typography>
-          </div>
-        </MenuItem>
-        <hr className="border-t border-white m-1 w-3/4 mx-auto"/>
-      </a>
-      
-    ),
-  );
-
-  return (
-    <React.Fragment>
-      <Menu
-        open={isMenuOpen}
-        handler={setIsMenuOpen}
-        offset={{ mainAxis: 20 }}
-        placement="bottom"
-        allowHover={true}
-      >
-        <MenuHandler>
-          <Typography placeholder={"Menu"} as="div" variant="small" className="font-medium">
-            <ListItem placeholder={"Menu"}
-              className="flex items-center gap-2 py-2 pr-4 font-medium text-white transition-all duration-200  hover:scale-105 hover:brightness-125 hover:text-[rgb(241,203,250) cursor-pointer"
-              selected={isMenuOpen || isMobileMenuOpen}
-              onClick={() => setIsMobileMenuOpen((cur) => !cur)}
-            >
-              COLECCIONES
-              <ChevronDownIcon
-                strokeWidth={2.5}
-                className={`hidden h-3 w-3 transition-transform lg:block ${isMenuOpen ? "rotate-180" : ""
-                  }`}
-              />
-              <ChevronDownIcon
-                strokeWidth={2.5}
-                className={`block h-3 w-3 transition-transform lg:hidden ${isMobileMenuOpen ? "rotate-180" : ""
-                  }`}
-              />
-            </ListItem>
-          </Typography>
-        </MenuHandler>
-        <MenuList placeholder={"Menu"} className="hidden rounded max-w-screen-xl lg:block bg-black shadow-[0_0_10px_1px_rgb(0,0,0)]">
-          <ul className="grid grid-cols-1 gap-y-3 outline-none outline-0">
-            {renderItems}
-          </ul>
-        </MenuList>
-      </Menu>
-      <div className="block lg:hidden">
-        <Collapse open={isMobileMenuOpen}>{renderItems}</Collapse>
-      </div>
-    </React.Fragment>
-  );
+type PAGESTYPE = {
+  page: string,
+  route: string
 }
-
-type NavItemType ={
-  title :string,
-  redirect: string
-}
-export const NavItem = ({title, redirect}:NavItemType) => {
-  const router = useRouter();
-  return (
-   
-    <Typography placeholder={title}
-      as="a"
-      variant="small"
-      color="white"
-      className="font-medium"
-      onClick={()=>router.push(redirect)}
-    >
-      <ListItem placeholder={title} className="flex items-center gap-2 py-2 pr-4 transition-all duration-200 hover:scale-105 hover:brightness-125 hover:text-[rgb(241,203,250)] cursor-pointer">{title}</ListItem>
-    </Typography>
-  )
-}
-
-
+const pages: PAGESTYPE[] = [{ page: 'PRODUCTOS', route: '/products' }, { page: 'MARCA', route: '/branding' }];
 
 
 export const NavBar = () => {
+  const router = useRouter();
+  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
+
+  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElNav(event.currentTarget);
+  };
+
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-black flex justify-between items-center px-8 py-4">
-          <div className="text-xl font-bold text-white font-sans">TANIART</div>
-          <div className="flex space-x-6 text-sm">
-            <NavItem title="INICIO" redirect="/"/>
-            <NavListMenu />
-            <NavItem title="PRODUCTOS" redirect="/products"/>
-            <NavItem title="MARCA" redirect="/branding"/>
-          </div>
-            <SidebarWithBurgerMenu/>
-        </nav>
-  )
+    <AppBar sx={{
+      backgroundColor: 'black',
+      color: 'white',
+    }}>
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href=""
+            sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            TANIART
+          </Typography>
+
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{ display: { xs: 'block', md: 'none' } }}
+            >
+              {pages.map((objPage) => (
+                <MenuItem key={objPage.page} onClick={() => { router.push(objPage.route) }}>
+                  <Typography sx={{ textAlign: 'center' }}>{objPage.page}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <Typography
+            variant="h5"
+            noWrap
+            component="a"
+            href="#app-bar-with-responsive-menu"
+            sx={{
+              mr: 2,
+              display: { xs: 'flex', md: 'none' },
+              flexGrow: 1,
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            TANIART
+          </Typography>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            {pages.map((objPage) =>
+            (
+              <Button
+                key={objPage.page}
+                onClick={() => { router.push(objPage.route) }}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                {objPage.page}
+              </Button>
+            )
+            )}
+          </Box>
+          <Box sx={{ flexGrow: 0 }}>
+            <CartDialog />
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
+  );
 }
+

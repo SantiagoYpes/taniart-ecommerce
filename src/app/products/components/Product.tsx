@@ -1,7 +1,16 @@
-
 import { ProductType } from "../../context/ProductsProvider"
 import { ReducerActionType, ReducerAction } from "../../context/CartProvider"
 import { ReactElement } from "react"
+import Card from '@mui/material/Card';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ShareIcon from '@mui/icons-material/Share';
+import { Button } from "@mui/material";
+import { ShoppingBag } from "@mui/icons-material";
 
 type PropsType = {
     product: ProductType,
@@ -10,56 +19,54 @@ type PropsType = {
     inCart: boolean
 }
 
-import {
-    Card,
-    CardHeader,
-    CardBody,
-    CardFooter,
-    Typography,
-    Button,
-} from "@material-tailwind/react";
+
 
 const Product = ({ product, dispatch, REDUCER_ACTIONS, inCart }: PropsType): ReactElement => {
     const img: string = `/img/${product.sku}.jpg`
     const onAddToCart = () => dispatch({ type: REDUCER_ACTIONS.ADD, payload: { ...product, qty: 1 } })
-    const itemInCart = inCart ? '-> Item in Car ✔️' : null
+    const itemInCart = inCart ? '-> Añadido ✔️' : null
     return (
-        <Card placeholder="Card" className="w-50 bg-[#0D0D0D] rounded-lg sm:w-50 md:w-25 lg:w-[300px] p-4 m-5 shadow-[0_0_10px_2px_rgb(236,23,252)]">
-            <CardHeader placeholder="CardHeader" shadow={false} floated={false} className="h-80 mb-5">
-                <img
-                    src={img}
-                    alt={product.name}
-                    className="h-90 w-full object-cover"
-                />
-            </CardHeader>
-            <CardBody placeholder="CardBody">
-                <div className="mb-2 flex items-center justify-between">
-                    <Typography placeholder={"Product"} color="white" className="font-medium">
-                        {product.name}
-                    </Typography>
-                    <Typography placeholder={"Price"} color="white" className="font-medium">
-                        {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(product.price)} {itemInCart}
-                    </Typography>
-                </div>
-                <Typography placeholder="Description"
-                    variant="small"
-                    color="white"
-                    className="font-normal opacity-80"
-                >
-                    With plenty of talk and listen time, voice-activated Siri access, and
-                    an available wireless charging case.
+        <Card elevation={10 } sx={{
+            boxShadow: '0px 4px 20px rgba(128, 90, 213, 0.6)',
+            backgroundColor: 'black',
+            width: {
+                xs: '90%',
+                sm: '430px',
+                md: '330px',
+            },
+            maxWidth: '100%',
+            margin: '0 auto',
+        }}>
+
+            <CardMedia
+                component="img"
+                sx={{
+                    width: {
+                        xs: '90%',
+                        sm: '430px',
+                        md: '330px',
+                    }, height: '320px'
+                }}
+                image={img}
+                alt={product.name}
+            />
+            <CardContent>
+                <Typography variant="body2" sx={{ color: 'white' }}>
+                    This impressive paella is a perfect party dish and a fun meal to cook
+                    together with your guests.
                 </Typography>
-            </CardBody>
-            <CardFooter placeholder="CardFooter" className="flex justify-center pt-4">
-                <Button
-                    placeholder="Add to cart"
-                    ripple={false}
-                    onClick={onAddToCart}
-                    className="bg-white text-black shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100 text-xs px-6 py-2 rounded-none"
-                >
-                    Agregar a la bolsa
-                </Button>
-            </CardFooter>
+                <Typography variant="h6" sx={{color:'white'}}>{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(product.price)} {itemInCart} </Typography>
+            </CardContent>
+            <CardActions disableSpacing sx={{justifyContent:'flex-end'}}>
+                <IconButton aria-label="add to favorites" color="secondary">
+                    <FavoriteIcon />
+                </IconButton>
+                <IconButton aria-label="share" color="primary">
+                    <ShareIcon />
+                </IconButton>
+
+                <Button variant="outlined" sx={{ borderColor: 'white', color: 'white'}} endIcon={<ShoppingBag />} onClick={onAddToCart}>Añadir a la Bolsa</Button>
+            </CardActions>
         </Card>
     );
 }
