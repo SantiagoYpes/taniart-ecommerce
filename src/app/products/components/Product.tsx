@@ -11,6 +11,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import { Button } from "@mui/material";
 import { ShoppingBag } from "@mui/icons-material";
+import { toast, Toaster } from "react-hot-toast";
 
 type PropsType = {
     product: ProductType,
@@ -23,16 +24,23 @@ type PropsType = {
 
 const Product = ({ product, dispatch, REDUCER_ACTIONS, inCart }: PropsType): ReactElement => {
     const img: string = `/img/${product.sku}.jpg`
-    const onAddToCart = () => dispatch({ type: REDUCER_ACTIONS.ADD, payload: { ...product, qty: 1 } })
+    const onAddToCart = () => {
+        toast.success('Agregado al carrito',{
+            style:{
+                background:'#232828',
+                color:'#fff'
+            }
+        })
+        dispatch({ type: REDUCER_ACTIONS.ADD, payload: { ...product, qty: 1 } })}
     const itemInCart = inCart ? '-> Añadido ✔️' : null
     return (
-        <Card elevation={10 } sx={{
+        <Card elevation={10} sx={{
             boxShadow: '0px 4px 20px rgba(128, 90, 213, 0.6)',
             backgroundColor: 'black',
             width: {
                 xs: '90%',
-                sm: '430px',
-                md: '330px',
+                sm: '420px',
+                md: '320px',
             },
             maxWidth: '100%',
             margin: '0 auto',
@@ -43,8 +51,8 @@ const Product = ({ product, dispatch, REDUCER_ACTIONS, inCart }: PropsType): Rea
                 sx={{
                     width: {
                         xs: '90%',
-                        sm: '430px',
-                        md: '330px',
+                        sm: '420px',
+                        md: '320px',
                     }, height: '320px'
                 }}
                 image={img}
@@ -55,9 +63,9 @@ const Product = ({ product, dispatch, REDUCER_ACTIONS, inCart }: PropsType): Rea
                     This impressive paella is a perfect party dish and a fun meal to cook
                     together with your guests.
                 </Typography>
-                <Typography variant="h6" sx={{color:'white'}}>{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(product.price)} {itemInCart} </Typography>
+                <Typography variant="h6" sx={{ color: 'white' }}>{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(product.price)} {itemInCart} </Typography>
             </CardContent>
-            <CardActions disableSpacing sx={{justifyContent:'flex-end'}}>
+            <CardActions disableSpacing sx={{ justifyContent: 'flex-end' }}>
                 <IconButton aria-label="add to favorites" color="secondary">
                     <FavoriteIcon />
                 </IconButton>
@@ -65,8 +73,9 @@ const Product = ({ product, dispatch, REDUCER_ACTIONS, inCart }: PropsType): Rea
                     <ShareIcon />
                 </IconButton>
 
-                <Button variant="outlined" sx={{ borderColor: 'white', color: 'white'}} endIcon={<ShoppingBag />} onClick={onAddToCart}>Añadir a la Bolsa</Button>
+                <Button variant="outlined" sx={{ borderColor: 'white', color: 'white' }} endIcon={<ShoppingBag />} onClick={onAddToCart}>Añadir a la Bolsa</Button>
             </CardActions>
+            <Toaster position="top-right" />
         </Card>
     );
 }

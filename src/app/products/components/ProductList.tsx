@@ -20,7 +20,7 @@ const ProductList = () => {
         })    
     }
     const content = (
-        <main className="w-full grid grid-cols-1 bg-[#232828] pt-5 sm:grid-cols-2 md:grid-cols-3 gap-x-2 gap-y-10 justify-items-center">
+        <main className="w-full grid grid-cols-1 bg-[#232828] pt-5 sm:grid-cols-2 md:grid-cols-4 gap-x-2 gap-y-10 justify-items-center">
             {pageContent}
         </main>
     )

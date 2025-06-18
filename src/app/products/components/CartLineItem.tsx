@@ -2,10 +2,13 @@ import React, { ChangeEvent, ReactElement } from 'react'
 import { CartItemType } from '../../context/CartProvider'
 import { ReducerAction } from '../../context/CartProvider'
 import { ReducerActionType } from '../../context/CartProvider'
-import { ListItem } from '@mui/material'
+import { ListItem, Menu, Stack } from '@mui/material'
 import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemIcon from '@mui/material/ListItemIcon';
+import Select, { SelectChangeEvent } from '@mui/material/Select'
+import { MenuItem } from '@mui/material'
+
 import ListItemText from '@mui/material/ListItemText';
+import { Close } from '@mui/icons-material'
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
@@ -24,10 +27,10 @@ export const CartLineItem = ({ item, dispatch, REDUCER_ACTIONS }: PropsType) => 
     const highestQty: number = 20 > item.qty ? 20 : item.qty
     const optionValues: number[] = [...Array(highestQty).keys()].map(i => i + 1)
     const options: ReactElement[] = optionValues.map(val => {
-        return <option value={val} key={`opt${val}`}>{val}</option>
+        return <MenuItem value={val} key={`opt${val}`}>{val}</MenuItem>
     })
 
-    const onChangeQty = (e: ChangeEvent<HTMLSelectElement>) => {
+    const onChangeQty = (e: SelectChangeEvent) => {
         dispatch({
             type: REDUCER_ACTIONS.QUANTITY,
             payload: { ...item, qty: Number(e.target.value) }
@@ -39,27 +42,32 @@ export const CartLineItem = ({ item, dispatch, REDUCER_ACTIONS }: PropsType) => 
     })
 
     const content = (
-        <>
-            <ListItem
-                secondaryAction={
-                    <IconButton edge="end" aria-label="delete">
-                        <DeleteIcon />
-                    </IconButton>
-                }
-            >
+        <Stack spacing={2} direction="row" sx={{ justifyContent: "center" }}>
+            <ListItem>
                 <ListItemAvatar>
                     <Avatar>
-                    <img src={img} alt={item.name} className="cart__img" />
+                        <img src={img} alt={item.name} className="cart__img" />
                     </Avatar>
                 </ListItemAvatar>
+
                 <ListItemText
                     primary={item.name}
-                    secondary={item.price}
+                    secondary={new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(lineTotal)}
                 />
-            </ListItem>
+                <Select value={item.qty.toString()} size='small' onChange={onChangeQty}>
+                    {options}
+                </Select>
+                <div aria-label="Line Item Subtotal" className="cart__item-subtotal">
+                    {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(lineTotal)}
+                </div>
 
-        </>
+                <IconButton edge="end" aria-label="delete" >
+                    <Close color='error' onClick={onRemoveFromCart} />
+                </IconButton>
+            </ListItem>
+        </Stack>
+
+
     )
     return content
 }
-export default CartLineItem
