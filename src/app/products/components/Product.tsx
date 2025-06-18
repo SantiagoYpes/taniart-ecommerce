@@ -28,9 +28,9 @@ const CoverImage = styled('div')({
   backgroundColor: 'rgba(0,0,0,0.08)',
   '& > img': {
     width: '100%',
-    height: '100%', // 🔑 Para que la imagen llene el contenedor verticalmente también
-    objectFit: 'cover', // 🔑 Hace que se recorte sin deformarse
-    display: 'block', // evita espacios debajo por línea base de inline img
+    height: '100%', 
+    objectFit: 'cover',
+    display: 'block', 
   },
 });
 
