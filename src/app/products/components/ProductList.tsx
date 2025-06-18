@@ -24,8 +24,11 @@ const ProductList = () => {
     }
     const content = (
 
-        <main className="w-full bg-[#232828] pt-5 ">
-            <List sx={{ width: '100%', maxWidth: 360 }}>
+        <main className="w-full bg-[#232828] p-5 ">
+            <List sx={{
+                width: '100%', display: 'flex',
+                flexDirection: 'column', gap: 3
+            }}>
                 {pageContent}
             </List>
 

@@ -20,17 +20,20 @@ type PropsType = {
 }
 
 const CoverImage = styled('div')({
-    width: 250,
-    height: 250,
-    objectFit: 'cover',
-    overflow: 'hidden',
-    flexShrink: 0,
-    borderRadius: 8,
-    backgroundColor: 'rgba(0,0,0,0.08)',
-    '& > img': {
-        width: '100%',
-    },
+  width: 250,
+  height: 250,
+  overflow: 'hidden',
+  flexShrink: 0,
+  borderRadius: 8,
+  backgroundColor: 'rgba(0,0,0,0.08)',
+  '& > img': {
+    width: '100%',
+    height: '100%', // 🔑 Para que la imagen llene el contenedor verticalmente también
+    objectFit: 'cover', // 🔑 Hace que se recorte sin deformarse
+    display: 'block', // evita espacios debajo por línea base de inline img
+  },
 });
+
 
 const Product = ({ product, dispatch, REDUCER_ACTIONS, inCart }: PropsType): ReactElement => {
     const img: string = `/img/${product.sku}.jpg`
@@ -45,9 +48,9 @@ const Product = ({ product, dispatch, REDUCER_ACTIONS, inCart }: PropsType): Rea
                 sm: '430px',
                 md: '1500px',
             },
+            gap:2
 
         }}>
-
             <ListItemAvatar>
                 <CoverImage>
                     <img
