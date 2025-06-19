@@ -11,6 +11,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import { Button, ListItem } from "@mui/material";
 import { ShoppingBag } from "@mui/icons-material";
 import { styled } from '@mui/material/styles';
+import toast, { Toaster } from "react-hot-toast";
 
 type PropsType = {
     product: ProductType,
@@ -20,42 +21,43 @@ type PropsType = {
 }
 
 const CoverImage = styled('div')({
-  width: 250,
-  height: 250,
-  overflow: 'hidden',
-  flexShrink: 0,
-  borderRadius: 8,
-  backgroundColor: 'rgba(0,0,0,0.08)',
-  '& > img': {
-    width: '100%',
-    height: '100%', 
-    objectFit: 'cover',
-    display: 'block', 
-  },
+    width: 250,
+    height: 250,
+    overflow: 'hidden',
+    flexShrink: 0,
+    borderRadius: 8,
+    backgroundColor: 'rgba(0,0,0,0.08)',
+    '& > img': {
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover',
+        display: 'block',
+    },
 });
 
 
 const Product = ({ product, dispatch, REDUCER_ACTIONS, inCart }: PropsType): ReactElement => {
     const img: string = `/img/${product.sku}.jpg`
     const onAddToCart = () => {
-        toast.success('Agregado al carrito',{
-            style:{
-                background:'#232828',
-                color:'#fff'
+        toast.success('Añadido a la Bolsa', {
+            style: {
+                background: '#232828',
+                color: '#fff'
             }
         })
-        dispatch({ type: REDUCER_ACTIONS.ADD, payload: { ...product, qty: 1 } })}
+        dispatch({ type: REDUCER_ACTIONS.ADD, payload: { ...product, qty: 1 } })
+    }
     const itemInCart = inCart ? '-> Añadido ✔️' : null
     return (
         <ListItem sx={{
-            boxShadow: '0px 4px 20px rgba(128, 90, 213, 0.6)',
+            boxShadow: '0px 4px 20px rgba(252,23,252, 0.6)',
             backgroundColor: 'black',
             width: {
                 xs: '90%',
                 sm: '430px',
                 md: '1500px',
             },
-            gap:2
+            gap: 2
 
         }}>
             <ListItemAvatar>

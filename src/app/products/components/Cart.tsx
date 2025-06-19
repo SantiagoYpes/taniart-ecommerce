@@ -19,7 +19,7 @@ export const Cart = () => {
     }
 
     const pageContent = confirm ? <h2> Thank you for your order. </h2> :
-        <div className="w-full">
+        <div className="w-full items-center">
             {totalItems === 0 ? <> <Typography variant="h5">Aún no tienes items en tu bolsa</Typography> <Divider></Divider></> :
 
                 <Accordion defaultExpanded>

@@ -5,8 +5,6 @@ import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import { IconButton, Typography } from '@mui/material';
 import Badge, { BadgeProps } from '@mui/material/Badge';

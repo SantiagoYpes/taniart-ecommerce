@@ -42,30 +42,30 @@ export const CartLineItem = ({ item, dispatch, REDUCER_ACTIONS }: PropsType) => 
     })
 
     const content = (
-        <Stack spacing={2} direction="row" sx={{ justifyContent: "center" }}>
-            <ListItem>
-                <ListItemAvatar>
-                    <Avatar>
-                        <img src={img} alt={item.name} className="cart__img" />
-                    </Avatar>
-                </ListItemAvatar>
 
-                <ListItemText
-                    primary={item.name}
-                    secondary={new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(lineTotal)}
-                />
-                <Select value={item.qty.toString()} size='small' onChange={onChangeQty}>
-                    {options}
-                </Select>
-                <div aria-label="Line Item Subtotal" className="cart__item-subtotal">
-                    {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(lineTotal)}
-                </div>
+        <ListItem sx={{gap:3}}>
+            <ListItemAvatar>
+                <Avatar>
+                    <img src={img} alt={item.name} className="cart__img" />
+                </Avatar>
+            </ListItemAvatar>
 
-                <IconButton edge="end" aria-label="delete" >
-                    <Close color='error' onClick={onRemoveFromCart} />
-                </IconButton>
-            </ListItem>
-        </Stack>
+            <ListItemText
+                primary={item.name}
+                secondary={new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(item.price)}
+            />
+            <Select value={item.qty.toString()} size='small' onChange={onChangeQty}>
+                {options}
+            </Select>
+            <div aria-label="Line Item Subtotal" className="cart__item-subtotal">
+                {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(lineTotal)}
+            </div>
+
+            <IconButton edge="end" aria-label="delete" >
+                <Close color='error' onClick={onRemoveFromCart} />
+            </IconButton>
+        </ListItem>
+
 
 
     )

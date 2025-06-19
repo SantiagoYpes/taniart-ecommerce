@@ -14,9 +14,14 @@ const ProductList = () => {
 
         pageContent = products.map(product => {
             const inCart: boolean = cart.some(item => item.sku === product.sku)
-
             return (
-                <Product key={product.sku} product={product} dispatch={dispatch} REDUCER_ACTIONS={REDUCER_ACTIONS} inCart={inCart} />
+                <div key={product.sku}
+                    className="transition-transform duration-300 hover:scale-105"
+                >
+                    <Product key={product.sku} product={product} dispatch={dispatch} REDUCER_ACTIONS={REDUCER_ACTIONS} inCart={inCart} />
+                </div>
+
+
             )
         })
 
@@ -24,10 +29,10 @@ const ProductList = () => {
     }
     const content = (
 
-        <main className="w-full bg-[#232828] p-5 ">
+        <main className="bg-[#232828] p-5 ">
             <List sx={{
                 width: '100%', display: 'flex',
-                flexDirection: 'column', gap: 3
+                flexDirection: 'column', gap: 4
             }}>
                 {pageContent}
             </List>
