@@ -2,7 +2,7 @@
     "products":[
         {
             "sku" : "item0001",
-            "name" : "Moda Moderna",
+            "name" : "Concepción Moderna",
             "collection": "Ilustracion",
             "price" : 9.99
         },
@@ -29,6 +29,47 @@
             "name" : "Vestido Niño",
             "collection": "Coral",
             "price" : 49.99
+        },
+        {
+            "sku" : "item0006",
+            "name" : "Pecadora Conjunto",
+            "collection": "Pecadora",
+            "price" : 99.99
+        },
+        {
+            "sku" : "item0007",
+            "name" : "Coral Conjunto",
+            "collection": "Coral",
+            "price" : 79.99
+        },
+        {
+            "sku" : "item0008",
+            "name" : "Pecadora #1",
+            "collection": "Pecadora",
+            "price" : 19.99
+        },
+        {
+            "sku" : "item0009",
+            "name" : "Pecadora #1 Ilustración",
+            "collection": "Ilustracion",
+            "price" : 19.99
+        },
+        {
+            "sku" : "item0010",
+            "name" : "Pecadora #2 Ilustración",
+            "collection": "Ilustracion",
+            "price" : 19.99
+        },{
+            "sku" : "item0011",
+            "name" : "Pecadora #3 Ilustración",
+            "collection": "Ilustracion",
+            "price" : 19.99
+        },
+        {
+            "sku" : "item0012",
+            "name" : "Pecadora #2",
+            "collection": "Pecadora",
+            "price" : 19.99
         }
     ]
 }

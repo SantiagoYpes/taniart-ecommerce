@@ -11,7 +11,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import { Button, ListItem } from "@mui/material";
 import { ShoppingBag } from "@mui/icons-material";
 import { styled } from '@mui/material/styles';
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 type PropsType = {
     product: ProductType,
@@ -55,7 +55,7 @@ const Product = ({ product, dispatch, REDUCER_ACTIONS, inCart }: PropsType): Rea
             width: {
                 xs: '90%',
                 sm: '430px',
-                md: '1500px',
+                md: '600px',
             },
             gap: 2
 
@@ -71,8 +71,7 @@ const Product = ({ product, dispatch, REDUCER_ACTIONS, inCart }: PropsType): Rea
             <ListItemText>
                 <Typography variant="h6" sx={{ color: 'white' }}> {product.name} </Typography>
                 <Typography variant="body2" sx={{ color: 'white' }}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
                 </Typography>
                 <Typography variant="h6" sx={{ color: 'white' }}>{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(product.price)} {itemInCart} </Typography>
                 <CardActions disableSpacing sx={{ justifyContent: 'flex-end' }}>

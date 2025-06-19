@@ -1,70 +1,61 @@
-import { Tune } from '@mui/icons-material'
 import * as React from 'react';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import Box from '@mui/material/Box';
-import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import { useState } from 'react';
+import { Tune } from '@mui/icons-material'
+import { CatFilter } from './CatFilter';
+import { PriceFilter } from './PriceFilter';
+import { styled, alpha, Stack } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
+import { InputBase } from '@mui/material';
+const Search = styled('div')(({ theme }) => ({
+    position: 'relative',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: alpha(theme.palette.common.white, 0),
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.common.white, 0.02),
+  },
+    marginLeft: 0,
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+        marginLeft: theme.spacing(1),
+        width: 'auto',
+    },
+}));
 
-type FiltersCatType = {
-    category: string,
-    subs: string[],
+const SearchIconWrapper = styled('div')(({ theme }) => ({
+    padding: theme.spacing(0, 2),
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+}));
 
-}
-const FiltersCat: FiltersCatType[] = [
-    { category: 'Collection', subs: ['Niños', 'Pecadora', 'Calypso'] }
-]
-export const CheckBoxList = () => {
-    const [checked, setChecked] = React.useState([true, false]);
-
-    const handleChange1 = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setChecked([event.target.checked, event.target.checked]);
-    };
-
-    const handleChange2 = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setChecked([event.target.checked, checked[1]]);
-    };
-
-    const handleChange3 = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setChecked([checked[0], event.target.checked]);
-    };
-
-    const children = (
-        <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
-            <FormControlLabel
-                label="Child 1"
-                control={<Checkbox checked={checked[0]} onChange={handleChange2} color='secondary' />}
-            />
-            <FormControlLabel
-                label="Child 2"
-                control={<Checkbox checked={checked[1]} onChange={handleChange3} color='secondary' />}
-            />
-        </Box>
-    );
-
-    return (
-        FiltersCat.map(item => <div>
-            <FormControlLabel
-                label="Colección"
-                control={
-                    <Checkbox
-                        checked={checked[0] && checked[1]}
-                        indeterminate={checked[0] !== checked[1]}
-                        onChange={handleChange1}
-                        color='secondary'
-                    />
-                }
-            />
-            {children}
-        </div>)
-
-    );
-}
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+    color: 'inherit',
+    width: '700px',
+    '& .MuiInputBase-input': {
+        padding: theme.spacing(1, 1, 1, 0),
+        paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+        transition: theme.transitions.create('width'),
+        [theme.breakpoints.up('sm')]: {
+            width: '12ch',
+            '&:focus': {
+                width: '20ch',
+            },
+        },
+    },
+    borderColor:'white',
+    border:'1px solid white',
+    borderRadius:'4px'
+}));
 
 export const FiltersDialog = () => {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
 
     const toggleDrawer = (newOpen: boolean) => () => {
         setOpen(newOpen);
@@ -72,28 +63,40 @@ export const FiltersDialog = () => {
 
     const DrawerList = (
         <div className='bg-black text-white justify-items-center'>
-            <List>
+            <div className='w-1/2'>
+                <List>
+                    <ListItem disablePadding>
+                        <CatFilter />
+                    </ListItem>
+                    <ListItem disablePadding>
+                        <PriceFilter />
+                    </ListItem>
+                </List>
+            </div>
 
-                <ListItem disablePadding>
-                    <CheckBoxList />
-                </ListItem>
-
-            </List>
         </div>
     );
 
     return (
-        <>
+        <div className='text-white'>
+            <Stack direction='row'  spacing={2}>
+            <Search>
+                <SearchIconWrapper>
+                    <SearchIcon />
+                </SearchIconWrapper>
+                <StyledInputBase
+                    placeholder="Buscar..."
+                    inputProps={{ 'aria-label': 'search' }}
+                />
+            </Search>
             <Button variant='outlined' sx={{
                 color: 'white',
                 borderColor: 'white',
             }} onClick={toggleDrawer(true)} startIcon={<Tune />}>Filtros</Button>
+            </Stack>
             <Drawer open={open} onClose={toggleDrawer(false)} anchor='top'>
                 {DrawerList}
             </Drawer>
-        </>
+        </div>
     )
 }
-
-
-
