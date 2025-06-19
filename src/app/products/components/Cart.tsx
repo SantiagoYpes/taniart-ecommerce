@@ -28,7 +28,7 @@ export const Cart = () => {
                         aria-controls="panel1-content"
                         id="panel1-header"
                     >
-                        <Typography color="secondary" component="span">Productos en tu Bolsa</Typography>
+                        <Typography color="secondary" variant='h4' component="span">Productos en tu Bolsa</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                         <List>
@@ -40,7 +40,7 @@ export const Cart = () => {
                         </List>
                     </AccordionDetails>
                 </Accordion>}
-            <div>
+            <div className="flex flex-col justify-end items-center h-full">
                 <Typography variant="body1">Total: {totalPrice}</Typography>
                 <div className="mt-4">
                     <Button variant="contained" color="secondary" onClick={onSubmitOrder}>

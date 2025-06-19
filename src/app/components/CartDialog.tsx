@@ -29,7 +29,7 @@ export const CartDialog = () => {
   const DrawerList = (
     <Box role="presentation" sx={{
       '& .MuiDrawer-paper': {
-        width: '35%',
+        width: '30%',
         padding: '5px'
       }
     }}>
@@ -52,7 +52,7 @@ export const CartDialog = () => {
 
       <Drawer open={open} sx={{
         '& .MuiDrawer-paper': {
-          width: '35%',
+          width: '30%',
         },
       }} anchor='right' onClose={toggleDrawer(false)}>
         {DrawerList}

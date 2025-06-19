@@ -7,52 +7,9 @@ import { useState } from 'react';
 import { Tune } from '@mui/icons-material'
 import { CatFilter } from './CatFilter';
 import { PriceFilter } from './PriceFilter';
-import { styled, alpha, Stack } from '@mui/material';
+import { Stack } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import { InputBase } from '@mui/material';
-const Search = styled('div')(({ theme }) => ({
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.02),
-  },
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(1),
-        width: 'auto',
-    },
-}));
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: 'inherit',
-    width: '700px',
-    '& .MuiInputBase-input': {
-        padding: theme.spacing(1, 1, 1, 0),
-        paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-        transition: theme.transitions.create('width'),
-        [theme.breakpoints.up('sm')]: {
-            width: '12ch',
-            '&:focus': {
-                width: '20ch',
-            },
-        },
-    },
-    borderColor:'white',
-    border:'1px solid white',
-    borderRadius:'4px'
-}));
+import { Search, StyledInputBase, SearchIconWrapper } from '../styles/StyledSearchBar';
 
 export const FiltersDialog = () => {
     const [open, setOpen] = useState(false);
@@ -79,20 +36,20 @@ export const FiltersDialog = () => {
 
     return (
         <div className='text-white'>
-            <Stack direction='row'  spacing={2}>
-            <Search>
-                <SearchIconWrapper>
-                    <SearchIcon />
-                </SearchIconWrapper>
-                <StyledInputBase
-                    placeholder="Buscar..."
-                    inputProps={{ 'aria-label': 'search' }}
-                />
-            </Search>
-            <Button variant='outlined' sx={{
-                color: 'white',
-                borderColor: 'white',
-            }} onClick={toggleDrawer(true)} startIcon={<Tune />}>Filtros</Button>
+            <Stack direction='row' spacing={1}>
+                <Button variant='outlined' sx={{
+                    color: 'white',
+                    borderColor: 'white',
+                }} onClick={toggleDrawer(true)} startIcon={<Tune />}>Filtros</Button>
+                <Search>
+                    <SearchIconWrapper>
+                        <SearchIcon />
+                    </SearchIconWrapper>
+                    <StyledInputBase
+                        placeholder="Buscar..."
+                        inputProps={{ 'aria-label': 'search' }}
+                    />
+                </Search>
             </Stack>
             <Drawer open={open} onClose={toggleDrawer(false)} anchor='top'>
                 {DrawerList}

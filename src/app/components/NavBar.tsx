@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,7 +13,18 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { CartDialog } from "./CartDialog";
+import { FiltersDialog } from "../products/components/FiltersDialog";
 
+const typographyStyle = {
+  cursor: 'pointer',
+  mr: 2,
+  display: { xs: 'none', md: 'flex' },
+  fontFamily: 'monospace',
+  fontWeight: 700,
+  letterSpacing: '.3rem',
+  color: 'inherit',
+  textDecoration: 'none',
+}
 type PAGESTYPE = {
   page: string,
   route: string
@@ -23,6 +34,7 @@ const pages: PAGESTYPE[] = [{ page: 'PRODUCTOS', route: '/products' }, { page: '
 
 export const NavBar = () => {
   const router = useRouter();
+  const actualRoute: string = usePathname()
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -46,16 +58,8 @@ export const NavBar = () => {
             variant="h6"
             noWrap
             component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
+            onClick={() => router.push('/')}
+            sx={typographyStyle}
           >
             TANIART
           </Typography>
@@ -99,9 +103,10 @@ export const NavBar = () => {
             variant="h5"
             noWrap
             component="a"
-            href="/"
+            onClick={() => router.push('/')}
             sx={{
               mr: 2,
+              cursor: 'pointer',
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
               fontFamily: 'monospace',
@@ -113,7 +118,9 @@ export const NavBar = () => {
           >
             TANIART
           </Typography>
+
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+
             {pages.map((objPage) =>
             (
               <Button
@@ -126,6 +133,11 @@ export const NavBar = () => {
             )
             )}
           </Box>
+          <div className={actualRoute === "/products" ? '' : 'hidden'}>
+            <FiltersDialog></FiltersDialog>
+
+          </div>
+
           <Box sx={{ flexGrow: 0 }}>
             <CartDialog />
           </Box>

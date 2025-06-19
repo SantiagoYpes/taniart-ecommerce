@@ -1,11 +1,8 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Slider from '@mui/material/Slider';
 import { Typography } from '@mui/material';
-import { Grid } from '@mui/material';
-import { Input } from '@mui/material';
-import { Stack } from '@mui/material';
-import { useContext } from 'react';
+import { Grid, Input, Stack } from '@mui/material';
 import ProductContext from '@/app/context/ProductsProvider';
 
 function valuetext(value: number) {

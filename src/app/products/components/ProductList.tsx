@@ -30,7 +30,7 @@ const ProductList = () => {
     }
     const content = (
 
-        <main className="bg-[#232828] p-5 ">
+        <main className="bg-[#232828] p-5 pt-10 ">
             <List sx={{
                 width: '100%', flexWrap: 'wrap',
                 gap: 3, display: 'flex', justifyContent:'center'

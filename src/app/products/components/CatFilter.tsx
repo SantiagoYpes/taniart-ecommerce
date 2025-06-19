@@ -15,7 +15,6 @@ const FiltersCat: FiltersCatType[] = [
     { category: 'Collección', subs: ['Dibujo Plano', 'Ilustracion', 'Coral', 'Pecadora'] },
     { category: 'Collección', subs: ['Dibujo Plano', 'Ilustracion', 'Coral'] },
     { category: 'Collección', subs: ['Dibujo Plano', 'Ilustracion', 'Coral', 'Pecadora'] },
-    { category: 'Collección', subs: ['Dibujo Plano', 'Ilustracion', 'Coral', 'Pecadora'] },
 ]
 export const CatFilter = () => {
     const { filters, setFilters } = useContext(ProductContext)

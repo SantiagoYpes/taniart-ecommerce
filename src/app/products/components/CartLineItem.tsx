@@ -1,20 +1,12 @@
-import React, { ChangeEvent, ReactElement } from 'react'
-import { CartItemType } from '../../context/CartProvider'
-import { ReducerAction } from '../../context/CartProvider'
-import { ReducerActionType } from '../../context/CartProvider'
-import { ListItem, Menu, Stack } from '@mui/material'
+import React, { ReactElement } from 'react'
+import { CartItemType, ReducerAction, ReducerActionType } from '../../context/CartProvider'
+import { ListItem, MenuItem } from '@mui/material'
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Select, { SelectChangeEvent } from '@mui/material/Select'
-import { MenuItem } from '@mui/material'
-
 import ListItemText from '@mui/material/ListItemText';
 import { Close } from '@mui/icons-material'
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import FolderIcon from '@mui/icons-material/Folder';
-import DeleteIcon from '@mui/icons-material/Delete';
-
 
 type PropsType = {
     item: CartItemType,
@@ -42,7 +34,6 @@ export const CartLineItem = ({ item, dispatch, REDUCER_ACTIONS }: PropsType) => 
     })
 
     const content = (
-
         <ListItem sx={{gap:3}}>
             <ListItemAvatar>
                 <Avatar>
