@@ -34,7 +34,7 @@ export const CartLineItem = ({ item, dispatch, REDUCER_ACTIONS }: PropsType) => 
     })
 
     const content = (
-        <ListItem sx={{gap:3}}>
+        <ListItem sx={{ gap: 1 }}>
             <ListItemAvatar>
                 <Avatar>
                     <img src={img} alt={item.name} className="cart__img" />
@@ -42,6 +42,17 @@ export const CartLineItem = ({ item, dispatch, REDUCER_ACTIONS }: PropsType) => 
             </ListItemAvatar>
 
             <ListItemText
+                slotProps={{
+                    primary: {
+                        noWrap: true,
+                        sx: {
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            whiteSpace: 'nowrap',
+                            maxWidth: 100, 
+                        },
+                    },
+                }}
                 primary={item.name}
                 secondary={new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(item.price)}
             />

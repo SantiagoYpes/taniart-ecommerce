@@ -34,9 +34,8 @@ export const CartDialog = () => {
       }
     }}>
       <List>
-        <ListItem >
           <Cart />
-        </ListItem>
+
       </List>
       <Divider />
     </Box>
