@@ -7,14 +7,16 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
 import { Button, Divider, List } from "@mui/material";
+import { useRouter } from "next/navigation";
 
 export const Cart = () => {
+    const router = useRouter()
     const [confirm, setConfirm] = useState<boolean>(false)
     const { dispatch, REDUCER_ACTIONS, totalItems, totalPrice, cart } = useCart()
     const onSubmitOrder = () => {
         dispatch({ type: REDUCER_ACTIONS.SUBMIT })
+        router.push('/checkout')
         setConfirm(true)
     }
 
