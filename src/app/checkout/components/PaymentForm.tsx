@@ -26,7 +26,7 @@ export const PaymentForm = () => {
         setIsLoading(false)
     }
     return (
-        <div className='w-1/3'>
+        <div className='flex flex-col  gap-4 w-full'>
             <PaymentElement />
             <Button variant="contained" color="secondary" fullWidth onClick={hanldeClickOnPay} loading={isLoading}>
                 {isLoading ? 'Procesando Pago' : 'Pagar'}
